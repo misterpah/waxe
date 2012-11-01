@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 
+
 # External tool builders
 .externalToolBuilders/
 
@@ -161,3 +162,9 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+
+#c++ object
+src/obj/
+src/all_objs
+src/vc100.pdb
