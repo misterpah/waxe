@@ -1,0 +1,172 @@
+<xml>
+
+<!-- Build file for waxe.ndll -->
+<!-- Install hxcpp and run with 'haxelib run hxcpp Build.xml' -->
+
+<include name="${HXCPP}/build-tool/BuildCommon.xml"/>
+
+<set name="LIB_DIR" value="-Llib" unless="windows"/>
+<set name="LIB_DIR" value="-libpath:lib" if="windows"/>
+
+<set name="DBG" value="d" if="debug"/>
+
+<set name="WXROOT" value="../../../wxwidgets/" unless="WXROOT"/>
+<set name="WXLIB" value="${WXROOT}/lib/vc_lib/" if="windows"/>
+<set name="WXLIB" value="${WXROOT}/mac/lib" if="macos"/>
+<set name="WXLIB" value="${WXROOT}/linux/lib/" if="linux" unless="HXCPP_M64" />
+<set name="WXLIB" value="${WXROOT}/linux64/lib/" if="linux"/>
+
+<files id="files">
+   <compilerflag value = "-Iinclude"/>
+   <compilerflag value = "-I${WXROOT}/include"/>
+   <compilerflag value = "-I${WXROOT}/lib/vc_lib/mswu" if="windows" />
+   <compilerflag value = "-I${WXROOT}/mac/lib/wx/include/osx_cocoa-unicode-static-2.9" if="macos" />
+   <compilerflag value = "-I${WXROOT}/linux/lib/wx/include/gtk2-unicode-static-2.9" if="linux" unless="HXCPP_M64" />
+   <compilerflag value = "-I${WXROOT}/linux64/lib/wx/include/gtk2-unicode-static-2.9" if="linux" />
+   <compilerflag value = "-Iwaxe"/>
+   <compilerflag value = "-D_FILE_OFFSET_BITS=64" />
+   <compilerflag value = "-D_LARGE_FILES=64" />
+   <compilerflag value = "-D__WXOSX_COCOA__" if="macos"/>
+   <compilerflag value = "-DwxDEBUG_LEVEL=0" if="macos"/>
+   <compilerflag value = "-D__WXGTK__" if="linux"/>
+   <compilerflag value = "-D__WXMSW__" if="windows"/>
+
+   <file name="waxe/App.cpp"/>
+   <file name="waxe/HaxeAPI.cpp"/>
+   <file name="waxe/Window.cpp"/>
+   <file name="waxe/Frame.cpp"/>
+   <file name="waxe/MDI.cpp"/>
+   <file name="waxe/StaticText.cpp"/>
+   <file name="waxe/StaticBox.cpp"/>
+   <file name="waxe/Notebook.cpp"/>
+   <file name="waxe/TextCtrl.cpp"/>
+   <file name="waxe/Sizer.cpp"/>
+   <file name="waxe/Panel.cpp"/>
+   <file name="waxe/Dialog.cpp"/>
+   <file name="waxe/Button.cpp"/>
+   <file name="waxe/ListBox.cpp"/>
+   <file name="waxe/CheckBox.cpp"/>
+   <file name="waxe/ComboBox.cpp"/>
+   <file name="waxe/DC.cpp"/>
+   <file name="waxe/Pen.cpp"/>
+   <file name="waxe/Brush.cpp"/>
+   <file name="waxe/Font.cpp"/>
+   <file name="waxe/Bitmap.cpp"/>
+   <file name="waxe/Menu.cpp"/>
+   <file name="waxe/Scintilla.cpp"/>
+   <file name="waxe/GLCanvas.cpp"/>
+   <file name="waxe/Timer.cpp"/>
+   <file name="waxe/ControlWithItems.cpp"/>
+
+
+
+   <file name="waxe/Clay.cpp"/>
+   <file name="waxe/clay/Container.cpp"/>
+   <file name="waxe/clay/HintWindow.cpp"/>
+   <file name="waxe/clay/Manager.cpp"/>
+   <file name="waxe/clay/Serializer.cpp"/>
+   <file name="waxe/clay/Skin.cpp"/>
+   <file name="waxe/clay/ToolBox.cpp"/>
+
+
+</files>
+
+<target id="waxe.ndll" tool="linker" toolid="dll" output="waxe">
+   <files id="files"/>
+   <ext value=".ndll"/>
+   <outdir name="../ndll/${BINDIR}"/>
+   <flag value="${LIB_DIR}"/>
+
+   <lib name="${WXLIB}/libwx_baseu-2.9.a" if="macos"/>
+   <lib name="${WXLIB}/libwx_osx_cocoau_core-2.9.a" if="macos"/>
+   <lib name="${WXLIB}/libwx_osx_cocoau_stc-2.9.a" if="macos"/>
+   <lib name="${WXLIB}/libwx_osx_cocoau_gl-2.9.a" if="macos"/>
+   <lib name="${WXLIB}/libwxpng-2.9.a" if="macos" />
+
+   <lib name="${WXLIB}/libwx_baseu-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwx_gtk2u_core-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwx_gtk2u_gl-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwx_baseu-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwx_gtk2u_stc-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwx_gtk2u_core-2.9.a" if="linux"/>
+   <lib name="-lgtk-x11-2.0" if="linux"/>
+   <lib name="-lglib-2.0" if="linux"/>
+   <lib name="-lgobject-2.0" if="linux"/>
+   <lib name="-lgdk-x11-2.0" if="linux"/>
+   <lib name="-lgdk_pixbuf-2.0" if="linux"/>
+   <lib name="-lcairo" if="linux"/>
+   <lib name="-lpango-1.0" if="linux"/>
+   <lib name="-lpangocairo-1.0" if="linux"/>
+   <lib name="-lgthread-2.0" if="linux"/>
+   <lib name="-lGL" if="linux"/>
+   <lib name="-lX11" if="linux"/>
+
+<!--
+   <lib name="${WXLIB}/libwx_x11univu-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwx_x11univu_gl-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwxpng-2.9.a" if="linux"/>
+   <lib name="${WXLIB}/libwxzlib-2.9.a" if="linux"/>
+   <lib name="-lpango-1.0" if="linux"/>
+   <lib name="-lgobject-2.0" if="linux"/>
+   <lib name="-lgio-2.0" if="linux"/>
+   <lib name="-lpangoxft-1.0" if="linux"/>
+   <lib name="-lglib-2.0" if="linux"/>
+   <lib name="-lXm" if="linux"/>
+   <lib name="-lXt" if="linux"/>
+   <lib name="-lXext" if="linux"/>
+   <lib name="-lXft" if="linux"/>
+-->
+
+   <lib name="${WXLIB}/wxbase29u.lib" if="windows"/>
+   <lib name="${WXLIB}/wxmsw29u_core.lib" if="windows"/>
+   <lib name="${WXLIB}/wxmsw29u_stc.lib" if="windows"/>
+   <lib name="${WXLIB}/wxmsw29u_gl.lib" if="windows"/>
+   <lib name="${WXLIB}/wxpng.lib" if="windows"/>
+   <lib name="${WXLIB}/wxzlib.lib" if="windows"/>
+   <lib name="${WXLIB}/wxscintilla.lib" if="windows"/>
+
+   <lib name="${WXLIB}/libwxscintilla-2.9.a" unless="windows" />
+
+   <lib name="user32.lib" if="windows"/>
+   <lib name="winspool.lib" if="windows"/>
+   <lib name="advapi32.lib" if="windows"/>
+   <lib name="gdi32.lib" if="windows"/>
+   <lib name="comdlg32.lib" if="windows"/>
+   <lib name="comctl32.lib" if="windows"/>
+   <lib name="ole32.lib" if="windows"/>
+   <lib name="oleaut32.lib" if="windows"/>
+   <lib name="rpcrt4.lib" if="windows"/>
+   <lib name="shell32.lib" if="windows"/>
+   <lib name="kernel32.lib" if="windows"/>
+
+   <lib name="-framework" if="macos"/>
+   <lib name="IOKit" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="Carbon" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="Cocoa" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="System" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="AudioToolbox" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="QuickTime" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="OpenGL" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="AGL" if="macos"/>
+   <lib name="-framework" if="macos"/>
+   <lib name="WebKit" if="macos"/>
+
+   <lib name="-lz" if="macos"/>
+   <lib name="-lpthread" unless="windows"/>
+   <lib name="-liconv" if="macos"/>
+
+</target>
+
+<target id="default">
+   <target id="waxe.ndll"/>
+</target>
+
+
+</xml>

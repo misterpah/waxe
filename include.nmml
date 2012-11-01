@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<set name="waxe" />
+	<ndll name="waxe" />
+	
+</project>

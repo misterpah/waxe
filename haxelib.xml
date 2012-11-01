@@ -1,0 +1,8 @@
+<project name="waxe" url="http://code.google.com/p/waxe/" license="MIT">
+	<user name="elyon"/>
+	<user name="gamehaxe"/>
+    <tag v="cpp"/>
+    <tag v="neko"/>
+    <description>The waxe project allows haxe to access the wxWidgets library via the neko or c++ targets. The combination of functional and object-oriented aspects of the haxe language make this a very natural fit.</description>
+    <version name="1.0.1">Included an updated NDLL for Mac</version>
+</project>
