@@ -2,10 +2,10 @@ package wx;
 
 class Colour
 {
-	public var red(getRed,setRed):Int;
-	public var green(getGreen,setGreen):Int;
-	public var blue(getBlue,setBlue):Int;
-	public var combined(getCombined,setCombined):Int;
+	public var red(get,set):Int;
+	public var green(get,set):Int;
+	public var blue(get,set):Int;
+	public var combined(get,set):Int;
 
 	var mRGB:Int;
 
@@ -14,20 +14,20 @@ class Colour
 		mRGB = (red<<16) | (green<<8) | blue;
 	}
 
-	public function getRed():Int { return (mRGB>>16) & 0xff; }
-	public function setRed(inRed:Int):Int
+	public function get_red():Int { return (mRGB>>16) & 0xff; }
+	public function set_red(inRed:Int):Int
 		{ mRGB = (mRGB & 0x00ffff) | (inRed & 0xff); return inRed; }
 
-	public function getGreen():Int { return (mRGB>>8) & 0xff; }
-	public function setGreen(inGreen:Int):Int
+	public function get_green():Int { return (mRGB>>8) & 0xff; }
+	public function set_green(inGreen:Int):Int
 		{ mRGB = (mRGB & 0xff00ff) | (inGreen & 0xff); return inGreen; }
 
-	public function getBlue():Int { return (mRGB>>16) & 0xff; }
-	public function setBlue(inBlue:Int):Int
+	public function get_blue():Int { return (mRGB>>16) & 0xff; }
+	public function set_blue(inBlue:Int):Int
 		{ mRGB = (mRGB & 0xffff00) | (inBlue & 0xff); return inBlue; }
 
-	public function getCombined() { return mRGB; }
-	public function setCombined(inVal:Int) { mRGB = inVal & 0xffffff; return mRGB; }
+	public function get_combined() { return mRGB; }
+	public function set_combined(inVal:Int) { mRGB = inVal & 0xffffff; return mRGB; }
 
 
    public static function LightPink() { return new Colour(255,182,193); }
