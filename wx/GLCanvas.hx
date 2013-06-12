@@ -11,8 +11,8 @@ class GLCanvas extends Window
    {
       if (inParent==null)
          throw Error.INVALID_PARENT;
-		 
-	  var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
+
+      var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
       var handle = wx_glcanvas_create(a);
 
       return new GLCanvas(handle);
