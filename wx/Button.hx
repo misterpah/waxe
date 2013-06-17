@@ -4,8 +4,8 @@ import wx.Window;
 
 class Button extends Window
 {
-	public var label(getLabel,setLabel):String;
-	public var onClick(null,setOnClick) : Dynamic->Void;
+	public var label(get_label,set_label):String;
+	public var onClick(null,set) : Dynamic->Void;
 
    public static function create(inParent:Window, ?inID:Null<Int>, inLabel:String="",
 	                ?inPosition:Position,
@@ -13,8 +13,8 @@ class Button extends Window
    {
 		if (inParent==null)
 			throw Error.INVALID_PARENT;
-      var handle = wx_button_create(
-			[inParent.wxHandle,inID,inLabel,inPosition,inSize, inStyle] );
+	  var a:Array<Dynamic> = [inParent.wxHandle,inID,inLabel,inPosition,inSize, inStyle];
+      var handle = wx_button_create(a);
       return new Button(handle);
    }
 
@@ -24,14 +24,14 @@ class Button extends Window
 	   super(inHandle);
    }
 
-	function setOnClick(f:Dynamic->Void) {setHandler(wx.EventID.COMMAND_BUTTON_CLICKED,f); return f;}
+	function set_onClick(f:Dynamic->Void) {setHandler(wx.EventID.COMMAND_BUTTON_CLICKED,f); return f;}
 
-	public function setLabel(inString:String) : String
+	public function set_label(inString:String) : String
 	{
 		wx_button_set_label(wxHandle,inString);
 		return inString;
 	}
-	public function getLabel() : String
+	public function get_label() : String
 	{
 		return wx_button_get_label(wxHandle);
 	}
