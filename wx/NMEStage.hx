@@ -119,8 +119,8 @@ class NMEStage extends GLCanvas
    {
       if (inParent==null)
          throw Error.INVALID_PARENT;
-		
-	  var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
+
+      var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
       var handle = GLCanvas.wx_glcanvas_create(a);
       var w:Int = inSize==null ? -1 : inSize.width;
       var h:Int = inSize==null ? -1 : inSize.height;

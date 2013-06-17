@@ -72,8 +72,8 @@ class Window extends EventHandler
    {
       if (inParent==null)
          throw Error.INVALID_PARENT;
-      
-	  var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
+
+      var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
       var handle = wx_window_create(a);
       return new Window(handle);
    }
@@ -145,17 +145,17 @@ class Window extends EventHandler
    }
 
    /**These two are redundant pass-throughs to the getters, added to preserve API compatibility:**/
-   
-		public function isShown():Bool {
-			return get_shown();
-		}
-	
-		public function show(inShow:Bool = true):Bool {
-			return set_shown(inShow);
-		}
-   
+
+   public function isShown():Bool {
+      return get_shown();
+   }
+
+   public function show(inShow:Bool = true):Bool {
+      return set_shown(inShow);
+   }
+
    /****/
-   
+
    public function get_shown() : Bool { return wx_window_get_shown(wxHandle); }
    public function set_shown(inShow:Bool = true) : Bool
    {
