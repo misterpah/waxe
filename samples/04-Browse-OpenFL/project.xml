@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Browse-OpenFL" package="" version="1.0.0" company="LevelUpLabs" />
+	<app main="Main" path="Export" file="Browse-OpenFL" />
+	
+	<window width="800" height="600" fps="30" resizable="true"/>
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="waxe" />
+	
+	<source path="Assets" />
+	<icon path="Assets/nme.svg" />	
+</project>
