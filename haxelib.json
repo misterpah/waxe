@@ -1,0 +1,11 @@
+{
+	"name": "waxe",
+	"url" : "https://github.com/larsiusprime/waxe",
+	"license": "MIT",
+	"tags": ["cpp","neko"],
+	"description": "The waxe project allows haxe to access the wxWidgets library via the neko or c++ targets. The combination of functional and object-oriented aspects of the haxe language make this a very natural fit.",
+	"version": "1.0.2",
+	"releasenote": "Updated to work with Haxe3/OpenFL and also added misterpah's changes.",
+	"contributors": ["elyon","gamehaxe","misterpah","larsiusprime"],
+	"dependencies": {}
+}

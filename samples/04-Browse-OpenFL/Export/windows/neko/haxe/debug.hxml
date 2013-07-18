@@ -1,0 +1,19 @@
+-main ApplicationMain 
+-lib openfl
+-lib openfl-native
+-lib waxe
+-cp Source
+-cp C:\HaxeToolkit\haxe/lib\openfl/1,0,0-rc,3/
+-cp T:\Development\Libraries\openfl-native/
+-cp T:\Development\Libraries\waxe/
+-cp Assets
+-D no_console=1
+-D tools=1
+-D openfl_ver=1.0.0-rc.3
+-D openfl
+-D windows
+-D desktop
+-cp Export/windows/neko/haxe
+-neko Export/windows/neko/obj/ApplicationMain.n
+--macro allowPackage("flash")
+-debug
