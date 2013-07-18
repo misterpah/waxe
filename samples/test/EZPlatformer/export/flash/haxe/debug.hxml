@@ -1,0 +1,18 @@
+-main ApplicationMain 
+-lib openfl
+-lib flixel
+-cp source
+-cp C:\HaxeToolkit\haxe/lib\openfl/1,0,4/
+-D tools=1
+-D FLX_NO_DEBUG
+-D openfl_ver=1.0.4
+-D openfl
+-D FLX_NO_SOUND_TRAY
+-D web
+-swf-version 11.2
+-swf export/flash/bin/EZPlatformer.swf
+-swf-header 640:480:60:FFFFFF
+-cp export/flash/haxe
+#--remap nme:flash
+--no-inline
+-debug

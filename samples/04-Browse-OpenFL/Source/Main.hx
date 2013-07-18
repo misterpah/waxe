@@ -28,7 +28,7 @@ class Main
 	#if (cpp || neko)				
 	//Stuff just for Waxe
 		public var stage(get, null):ManagedStage;
-		private var _frame : Frame;
+		public var frame : Frame;
 		private var _stage : NMEStage;
 		
 		public static function main()
@@ -39,12 +39,13 @@ class Main
 		public function get_stage():ManagedStage {
 			if (_stage == null) return null;
 			return _stage.stage;
-		}   
-			
+		}   	
+		
 		public function layout()
 		{
 			_stage.size = _frame.clientSize;
 		}   
+		
 	#end
    
 	//Stuff for both targets
