@@ -1,0 +1,21 @@
+-main ApplicationMain 
+-lib openfl
+-lib openfl-native
+-lib flixel
+-lib waxe
+-cp source
+-cp C:\HaxeToolkit\haxe/lib\openfl/1,0,4/
+-cp T:\Development\Libraries\openfl-native/
+-cp T:\Development\Libraries\waxe/
+-D no_console=1
+-D tools=1
+-D FLX_NO_DEBUG
+-D openfl_ver=1.0.4
+-D openfl
+-D FLX_NO_SOUND_TRAY
+-D windows
+-D desktop
+-cpp export/windows/cpp/obj
+-cp export/windows/cpp/haxe
+--macro allowPackage("flash")
+-debug

@@ -5,7 +5,7 @@ typedef Size = { width:Int, height:Int };
 
 class Window extends EventHandler
 {
-   var wxEventHandlers:IntHash<Dynamic->Void>;
+   var wxEventHandlers:Map<Int,Dynamic->Void>;
 
 
    // For use with top-level windows
@@ -58,13 +58,13 @@ class Window extends EventHandler
    public static var INVALID_PARENT = "Invalid Parent";
 
 
-   public var size(getSize,setSize):Size;
-   public var sizer(getSizer,setSizer):Sizer;
-   public var clientSize(getClientSize,setClientSize):Size;
-   public var position(getPosition,setPosition):Position;
-   public var shown(isShown,show):Bool;
-   public var name(getName,setName):String;
-   public var backgroundColour(getBackgroundColour,setBackgroundColour):Int;
+   public var size(get,set):Size;
+   public var sizer(get,set):Sizer;
+   public var clientSize(get,set):Size;
+   public var position(get,set):Position;
+   public var shown(get,set):Bool;
+   public var name(get,set):String;
+   public var backgroundColour(get,set):Int;
 
 
    public static function create(inParent:Window,?inID:Int,?inPosition:Position,
@@ -72,14 +72,16 @@ class Window extends EventHandler
    {
       if (inParent==null)
          throw Error.INVALID_PARENT;
-      var handle = wx_window_create([inParent.wxHandle,inID,"",inPosition,inSize, inStyle] );
+
+      var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
+      var handle = wx_window_create(a);
       return new Window(handle);
    }
 
    function new(inHandle:Dynamic)
    {
       super(inHandle);
-      wxEventHandlers = new IntHash<Dynamic->Void>();
+      wxEventHandlers = new Map<Int,Dynamic->Void>();
    }
 
 
@@ -114,50 +116,62 @@ class Window extends EventHandler
    public function refresh() { wx_window_refresh(wxHandle); }
    public function destroy() { wx_window_destroy(wxHandle); }
 
-   public function getSize() : Size { return wx_window_get_size(wxHandle); }
-   public function setSize(inSize:Size) : Size
+   public function get_size() : Size { return wx_window_get_size(wxHandle); }
+   public function set_size(inSize:Size) : Size
    {
       wx_window_set_size(wxHandle, inSize);
       return inSize;
    }
 
-   public function getSizer() : Sizer { return wx_window_get_sizer(wxHandle); }
-   public function setSizer(inSizer:Sizer) : Sizer
+   public function get_sizer() : Sizer { return wx_window_get_sizer(wxHandle); }
+   public function set_sizer(inSizer:Sizer) : Sizer
    {
       wx_window_set_sizer(wxHandle, inSizer.wxGetHandle());
       return inSizer;
    }
 
-   public function getClientSize() : Size { return wx_window_get_client_size(wxHandle); }
-   public function setClientSize(inSize:Size) : Size
+   public function get_clientSize() : Size { return wx_window_get_client_size(wxHandle); }
+   public function set_clientSize(inSize:Size) : Size
    {
       wx_window_set_client_size(wxHandle, inSize.width, inSize.height);
       return inSize;
    }
 
-   public function getPosition() : Position { return wx_window_get_position(wxHandle); }
-   public function setPosition(inPos:Position) : Position
+   public function get_position() : Position { return wx_window_get_position(wxHandle); }
+   public function set_position(inPos:Position) : Position
    {
       wx_window_set_position(wxHandle, inPos);
       return inPos;
    }
 
-   public function isShown() : Bool { return wx_window_get_shown(wxHandle); }
-   public function show(inShow:Bool = true) : Bool
+   /**These two are redundant pass-throughs to the getters, added to preserve API compatibility:**/
+
+   public function isShown():Bool {
+      return get_shown();
+   }
+
+   public function show(inShow:Bool = true):Bool {
+      return set_shown(inShow);
+   }
+
+   /****/
+
+   public function get_shown() : Bool { return wx_window_get_shown(wxHandle); }
+   public function set_shown(inShow:Bool = true) : Bool
    {
       wx_window_set_shown(wxHandle, inShow);
       return inShow;
    }
 
-   public function getBackgroundColour() : Int { return wx_window_get_bg_colour(wxHandle); }
-   public function setBackgroundColour(inColour:Int) : Int
+   public function get_backgroundColour() : Int { return wx_window_get_bg_colour(wxHandle); }
+   public function set_backgroundColour(inColour:Int) : Int
    {
       wx_window_set_bg_colour(wxHandle, inColour);
       return inColour;
    }
 
-   public function getName() : String { return wx_window_get_name(wxHandle); }
-   public function setName(inName:String) : String
+   public function get_name() : String { return wx_window_get_name(wxHandle); }
+   public function set_name(inName:String) : String
    {
       wx_window_set_name(wxHandle, inName);
       return inName;
@@ -168,12 +182,12 @@ class Window extends EventHandler
 
 
    // Helpers ...
-   public var onClose(null,setOnClose) : Dynamic->Void;
-   function setOnClose(f:Dynamic->Void) {setHandler(wx.EventID.CLOSE_WINDOW,f); return f;}
-   public var onSize(null,setOnSize) : Dynamic->Void;
-   function setOnSize(f:Dynamic->Void) {setHandler(wx.EventID.SIZE,f); return f;}
-   public var onPaint(null,setOnPaint) : DC->Void;
-   function setOnPaint(f:DC->Void)
+   public var onClose(null,set) : Dynamic->Void;
+   function set_onClose(f:Dynamic->Void) {setHandler(wx.EventID.CLOSE_WINDOW,f); return f;}
+   public var onSize(null,set) : Dynamic->Void;
+   function set_onSize(f:Dynamic->Void) {setHandler(wx.EventID.SIZE,f); return f;}
+   public var onPaint(null,set) : DC->Void;
+   function set_onPaint(f:DC->Void)
    {
       var me = this;
       setHandler(wx.EventID.PAINT, function(_)

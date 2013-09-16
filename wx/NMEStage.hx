@@ -2,7 +2,7 @@ package wx;
 
 import wx.Window;
 import wx.EventID;
-import nme.display.ManagedStage;
+import openfl.display.ManagedStage;
 
 
 class NMEStage extends GLCanvas
@@ -16,7 +16,7 @@ class NMEStage extends GLCanvas
       super(inHandle);
       var me = this;
       mLastValue = 0;
-      stage = nme.Lib.createManagedStage(inWidth,inHeight);
+      stage = flash.Lib.createManagedStage(inWidth,inHeight);
       stage.onQuit = App.quit;
       stage.beginRender = me.makeCurrent;
       stage.endRender = me.flip;
@@ -37,7 +37,7 @@ class NMEStage extends GLCanvas
 
    function myOnSize(event:Dynamic)
    {
-      var s = getClientSize();
+      var s = get_clientSize();
       stage.resize(s.width,s.height);
    }
 
@@ -111,7 +111,7 @@ class NMEStage extends GLCanvas
 
    function render(_)
    {
-      stage.nmeRender(true);
+      stage.__render(true);
    }
 
    public static function create(inParent:Window,?inID:Int,?inPosition:Position,
@@ -119,7 +119,9 @@ class NMEStage extends GLCanvas
    {
       if (inParent==null)
          throw Error.INVALID_PARENT;
-      var handle = GLCanvas.wx_glcanvas_create([inParent.wxHandle,inID,"",inPosition,inSize, inStyle] );
+
+      var a:Array<Dynamic> = [inParent.wxHandle, inID, "", inPosition, inSize, inStyle];
+      var handle = GLCanvas.wx_glcanvas_create(a);
       var w:Int = inSize==null ? -1 : inSize.width;
       var h:Int = inSize==null ? -1 : inSize.height;
       var stage = new NMEStage(handle,w,h);

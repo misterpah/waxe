@@ -2,10 +2,10 @@ package wx;
 
 class DC
 {
-   public var pen(null,setPen):Pen;
-   public var brush(null,setBrush):Brush;
-   public var background(null,setBackground):Brush;
-   public var font(null,setFont):Font;
+   public var pen(null,set):Pen;
+   public var brush(null,set):Brush;
+   public var background(null,set):Brush;
+   public var font(null,set):Font;
    var wxHandle:Dynamic;
 
    function new(handle:Dynamic)
@@ -22,22 +22,22 @@ class DC
    {
       wx_dc_clear(wxHandle);
    }
-   public function setPen(inPen:Pen) : Pen
+   public function set_pen(inPen:Pen) : Pen
    {
       wx_dc_set_pen(wxHandle,inPen.wxGetHandle());
       return inPen;
    }
-   public function setBrush(inBrush:Brush) : Brush
+   public function set_brush(inBrush:Brush) : Brush
    {
       wx_dc_set_brush(wxHandle,inBrush.wxGetHandle());
       return inBrush;
    }
-   public function setBackground(inBrush:Brush) : Brush
+   public function set_background(inBrush:Brush) : Brush
    {
       wx_dc_set_background(wxHandle,inBrush.wxGetHandle());
       return inBrush;
    }
-   public function setFont(inFont:Font) : Font
+   public function set_font(inFont:Font) : Font
    {
       wx_dc_set_font(wxHandle,inFont.wxGetHandle());
       return inFont;

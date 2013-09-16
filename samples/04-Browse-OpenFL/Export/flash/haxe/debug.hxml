@@ -1,0 +1,19 @@
+-main ApplicationMain 
+-lib openfl
+-lib waxe
+-cp Source
+-cp C:\HaxeToolkit\haxe/lib\openfl/1,0,4/
+-cp T:\Development\Libraries\waxe/
+-cp Assets
+-D tools=1
+-D openfl_ver=1.0.4
+-D openfl
+-D fdb
+-D web
+-swf-version 11
+-swf Export/flash/bin/Browse-OpenFL.swf
+-swf-header 800:600:30:FFFFFF
+-cp Export/flash/haxe
+#--remap nme:flash
+--no-inline
+-debug
